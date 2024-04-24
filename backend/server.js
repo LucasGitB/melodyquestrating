@@ -1,14 +1,10 @@
-// server.js
-
+// backend/api/server.js
 import express from 'express';
 import cors from 'cors';
 import { Sequelize } from 'sequelize';
 import User from './User.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-import sequelize from './database.js';
 
 // Middleware pour parser le JSON dans les requêtes
 app.use(express.json());
@@ -44,19 +40,4 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-
-    // Synchroniser les modèles avec la base de données
-    await sequelize.sync({ alter: true });
-
-    // Lancer le serveur Express
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
+export { app }; // Exportez app de manière explicite
