@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_PASSWORD=toto
+    volumes:
+      - $PWD:/sql
+    ports:
+      - 5432:5432
+      
+  
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
