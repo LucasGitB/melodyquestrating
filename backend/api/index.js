@@ -1,4 +1,4 @@
-// backend/api/index.js
-import { app } from './server.js'; // Importez app de manière appropriée
+// api/index.js
+import app from '../server.js';
 
 export default app;
