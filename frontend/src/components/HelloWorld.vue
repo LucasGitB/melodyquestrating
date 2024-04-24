@@ -40,7 +40,6 @@ export default {
 
         if (response.ok) {
           console.log('User created successfully!');
-          // Réinitialisez le formulaire après la soumission réussie si nécessaire
           this.formData = {
             firstName: '',
             lastName: '',

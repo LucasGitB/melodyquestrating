@@ -1,13 +1,10 @@
 // database.js
 import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
 
-const sequelize = new Sequelize({
-    dialect: 'postgres', 
-    username: 'postgres', 
-    password: 'toto', 
-    host: 'localhost', 
-    port: 5432, 
-    database: 'postgres' 
-});
+// Load environment variables from .env file
+dotenv.config();
+
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 export default sequelize;
