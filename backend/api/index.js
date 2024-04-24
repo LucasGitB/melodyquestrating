@@ -60,3 +60,5 @@ app.use((req, res) => {
     console.error('Unable to connect to the database:', error);
   }
 })();
+
+export default app;
