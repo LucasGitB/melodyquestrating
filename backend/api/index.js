@@ -1,4 +1,7 @@
-// api/index.js
-import app from '../server.js';
+import express from 'express';
+const app = express();
 
-export default app;
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
+app.listen(3030, () => console.log("Server ready on port 3030."));
+
