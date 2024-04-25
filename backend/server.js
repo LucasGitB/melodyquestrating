@@ -5,6 +5,8 @@ import cors from 'cors';
 import { Sequelize } from 'sequelize';
 import User from './User.js';
 import Rating from './Rating.js';
+import Player from './Player.js'; // Assurez-vous que le chemin est correct vers votre fichier de modèle Player
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +18,30 @@ app.use(express.json());
 
 // Middleware pour autoriser les requêtes CORS
 app.use(cors());
+
+// Route pour insérer un nouveau joueur
+app.post('/players', async (req, res) => {
+  try {
+    const playerData = req.body;
+    
+    // Vérifier si le joueur existe déjà
+    const existingPlayer = await Player.findOne({ where: { playerId: playerData.playerId } });
+
+    
+    if (existingPlayer) {
+      // Si le joueur existe déjà, renvoyer un message d'erreur
+      return res.status(400).json({ error: 'Player already exists' });
+    }
+    
+    // Si le joueur n'existe pas, procéder à l'insertion
+    const newPlayer = await Player.create(playerData);
+    res.status(201).json(newPlayer);
+  } catch (error) {
+    console.error('Error creating player:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Route pour récupérer tous les utilisateurs
 app.get('/users', async (req, res) => {
