@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { Sequelize } from 'sequelize';
 import User from './User.js';
+import Rating from './Rating.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -38,6 +39,19 @@ app.post('/users', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// Route pour insérer une nouvelle évaluation
+app.post('/ratings', async (req, res) => {
+  try {
+    const ratingData = req.body;
+    const newRating = await Rating.create(ratingData);
+    res.status(201).json(newRating);
+  } catch (error) {
+    console.error('Error creating rating:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Gestionnaire d'erreurs pour les routes non trouvées
 app.use((req, res) => {
