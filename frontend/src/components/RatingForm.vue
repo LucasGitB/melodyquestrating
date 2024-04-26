@@ -5,11 +5,8 @@
     </h3>
     <form @submit.prevent="submitRating" class="space-y-4">
       <div>
-        <label for="playerId" class="block text-sm font-medium text-gray-700"
-          >Player ID (UUID):</label
-        >
         <input
-          type="text"
+          type="hidden"
           id="playerId"
           v-model="rating.playerId"
           required
@@ -21,7 +18,7 @@
         <div class="flex">
           <template v-for="star in 5">
             <span
-              class="cursor-pointer text-9xl"
+              class="cursor-pointer text-7xl"
               :class="{
                 'text-yellow-400': star <= rating.score,
                 'text-gray-300': star > rating.score,
