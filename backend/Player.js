@@ -10,6 +10,16 @@ const Player = sequelize.define('Player', {
   playerName: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  lastGame: {
+    type: DataTypes.DATE,
+    allowNull: true // Autoriser la valeur null pour lastGame
+  }
+}, {
+  hooks: {
+    beforeSave: (player, options) => {
+      player.lastGame = new Date();
+    }
   }
 });
 

@@ -19,20 +19,21 @@ app.use(express.json());
 // Middleware pour autoriser les requêtes CORS
 app.use(cors());
 
-// Route pour insérer un nouveau joueur
+// Route pour insérer un nouveau joueur ou mettre à jour le champ lastGame
 app.post('/players', async (req, res) => {
   try {
     const playerData = req.body;
-    
+
     // Vérifier si le joueur existe déjà
     const existingPlayer = await Player.findOne({ where: { playerId: playerData.playerId } });
 
-    
     if (existingPlayer) {
-      // Si le joueur existe déjà, renvoyer un message d'erreur
-      return res.status(400).json({ error: 'Player already exists' });
+      // Si le joueur existe déjà, mettre à jour le champ lastGame
+      existingPlayer.set('lastGame', new Date());
+      await existingPlayer.save(); // Enregistrer les modifications
+      return res.status(200).json({ message: 'Player updated' });
     }
-    
+
     // Si le joueur n'existe pas, procéder à l'insertion
     const newPlayer = await Player.create(playerData);
     res.status(201).json(newPlayer);
@@ -41,6 +42,8 @@ app.post('/players', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
 
 app.get('/last-player', async (req, res) => {
   try {
