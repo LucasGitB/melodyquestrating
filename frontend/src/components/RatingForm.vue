@@ -42,15 +42,25 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       rating: {
-        playerId: "", // playerId vide pour permettre à l'utilisateur de saisir manuellement l'UUID
+        playerId: "",
         score: 0,
       },
     };
+  },
+  async created() {
+    try {
+      const response = await fetch("http://localhost:3000/last-player");
+      const data = await response.json();
+      this.rating.playerId = data.lastPlayerId;
+    } catch (error) {
+      console.error("Error fetching last player ID:", error);
+    }
   },
   methods: {
     setRating(star) {
@@ -62,18 +72,18 @@ export default {
         const playerId = this.rating.playerId
           .toLowerCase()
           .replace(/[^a-f0-9]/g, "");
-        const { performer, score, comment } = this.rating; // Destructuration des données d'évaluation
+        const { score } = this.rating; // Destructuration des données d'évaluation
         const response = await fetch("http://localhost:3000/ratings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ playerId, performer, score, comment }),
+          body: JSON.stringify({ playerId, score }),
         });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        this.rating = { playerId: "", performer: "", score: 0, comment: "" }; // Réinitialisation du formulaire
+        this.rating = { playerId: "", score: 0 }; // Réinitialisation du formulaire
         alert("Votre avis a été enregistré !");
       } catch (error) {
         console.error("Error:", error);
@@ -82,6 +92,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .bg-custom-color {
   background: linear-gradient(to bottom right, violet, orange);

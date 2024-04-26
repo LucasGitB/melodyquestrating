@@ -42,6 +42,25 @@ app.post('/players', async (req, res) => {
   }
 });
 
+app.get('/last-player', async (req, res) => {
+  try {
+    const lastPlayer = await Player.findOne({
+      order: [['createdAt', 'DESC']],
+    });
+
+    if (lastPlayer) {
+      res.status(200).json({ lastPlayerId: lastPlayer.playerId });
+    } else {
+      res.status(404).json({ error: 'No players found' });
+    }
+  } catch (error) {
+    console.error('Error fetching last player:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 // Route pour récupérer tous les utilisateurs
 app.get('/users', async (req, res) => {
