@@ -4,8 +4,12 @@ export default {
     './src/**/*.{vue,js,ts,jsx,tsx,html}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customColor: 'linear-gradient(to bottom right, violet, orange)',
+        customColorInverse: 'linear-gradient(to bottom right, orange, violet)',
+      },
+    },
   },
-  plugins: [],
 }
 

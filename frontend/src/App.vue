@@ -1,9 +1,11 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import RatingForm from './components/RatingForm.vue'
+import RatingList from './components/RatingList.vue'
 </script>
 
 <template>
 
-  <HelloWorld />
+  <RatingForm />
+  <!-- <RatingList /> -->
 </template>
 

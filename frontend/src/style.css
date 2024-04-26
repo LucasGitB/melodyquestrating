@@ -1,3 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.my-class {
+    color: linear-gradient(to bottom right, violet, orange);
+}
