@@ -113,27 +113,35 @@ app.get('/ratings/:playerId', async (req, res) => {
   }
 });
 
-// Route pour récupérer la somme des scores pour chaque joueur
 app.get('/total-scores', async (req, res) => {
   try {
-    // Utiliser une requête SQL GROUP BY avec la fonction d'agrégation SUM() pour additionner les scores
     const totalScores = await Rating.findAll({
-      attributes: ['playerId', [sequelize.fn('SUM', sequelize.col('score')), 'totalScore']],
-      group: ['playerId']
+      include: [
+        {
+          model: Player,
+          attributes: ['playerName', 'playerId'] // inclure playerId dans les attributs sélectionnés
+        }
+      ],
+      attributes: [
+        ['playerId', 'ratingPlayerId'],
+        [sequelize.fn('SUM', sequelize.col('score')), 'totalScore'],
+        'Player.playerId',
+        'Player.playerName'
+      ],
+      group: ['ratingPlayerId', 'Player.playerId', 'Player.playerName'] // inclure Player.playerId dans la clause GROUP BY
     });
     
-    // Vérifier si des données ont été trouvées
     if (totalScores.length === 0) {
       return res.status(404).json({ message: 'No scores found' });
     }
-    
-    // Renvoyer les résultats de la somme des scores
+
     res.json(totalScores);
   } catch (error) {
     console.error('Error fetching total scores:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 // Gestionnaire d'erreurs pour les routes non trouvées

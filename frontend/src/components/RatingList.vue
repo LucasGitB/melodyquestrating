@@ -3,12 +3,13 @@
       <h1>Scores des joueurs</h1>
       <ul v-if="scores.length">
         <li v-for="score in scores" :key="score.playerId">
-          Joueur {{ score.playerId }}: {{ score.totalScore }}
+          Joueur {{ score.Player.playerName }}: {{ score.totalScore }}
         </li>
       </ul>
       <p v-else>Aucun score trouvé</p>
     </div>
   </template>
+  
   
   <script>
   export default {

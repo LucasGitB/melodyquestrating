@@ -7,14 +7,17 @@ const Rating = sequelize.define('Rating', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  playerId: { 
+  playerId: {
     type: DataTypes.UUID,
     allowNull: false,
     references: {
       model: 'Players',
-      key: 'playerId' // Modifier la clé ici pour correspondre à la colonne de référence dans la table Players
+      key: 'playerId'
     }
   }
 });
+
+// Définir l'association entre Rating et Player
+Rating.belongsTo(Player, { foreignKey: 'playerId' });
 
 export default Rating;
