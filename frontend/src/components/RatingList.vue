@@ -1,15 +1,15 @@
 <template>
-    <div>
-      <h1>Scores des joueurs</h1>
-      <ul v-if="scores.length">
-        <li v-for="score in scores" :key="score.playerId">
-          Joueur {{ score.Player.playerName }}: {{ score.totalScore }}
-        </li>
-      </ul>
-      <p v-else>Aucun score trouvé</p>
+    <div class="p-6">
+      <h1 class="text-2xl font-bold mb-4">Scores des joueurs</h1>
+      <div v-if="scores.length">
+        <div v-for="(score, index) in scores" :key="score.playerId" class="mb-2">
+          <span :class="getPodiumClass(index)">{{ index + 1 }}.</span>
+          <span class="ml-2">Joueur {{ score.Player.playerName }}: {{ score.totalScore }}</span>
+        </div>
+      </div>
+      <p v-else class="text-red-500">Aucun score trouvé</p>
     </div>
   </template>
-  
   
   <script>
   export default {
@@ -17,6 +17,16 @@
       return {
         scores: [],
       };
+    },
+    methods: {
+      getPodiumClass(index) {
+        switch(index) {
+          case 0: return 'font-bold text-lg text-gold';
+          case 1: return 'font-bold text-lg text-silver';
+          case 2: return 'font-bold text-lg text-bronze';
+          default: return 'font-bold text-lg';
+        }
+      }
     },
     async created() {
       try {
@@ -32,3 +42,14 @@
   };
   </script>
   
+  <style scoped>
+  .text-gold {
+    color: gold;
+  }
+  .text-silver {
+    color: silver;
+  }
+  .text-bronze {
+    color: #cd7f32;
+  }
+  </style>
