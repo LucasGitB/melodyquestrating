@@ -44,11 +44,10 @@ app.post('/players', async (req, res) => {
 });
 
 
-
 app.get('/last-player', async (req, res) => {
   try {
     const lastPlayer = await Player.findOne({
-      order: [['createdAt', 'DESC']],
+      order: [['lastGame', 'DESC']],
     });
 
     if (lastPlayer) {
