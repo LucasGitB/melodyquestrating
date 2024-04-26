@@ -7,10 +7,6 @@ const Rating = sequelize.define('Rating', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  comment: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
   playerId: { 
     type: DataTypes.UUID,
     allowNull: false,

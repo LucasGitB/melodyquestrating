@@ -7,10 +7,6 @@
         <input type="text" id="playerId" v-model="rating.playerId" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
       </div>
       <div>
-        <label for="performer" class="block text-sm font-medium text-gray-700">Nom du chanteur:</label>
-        <input type="text" id="performer" v-model="rating.performer" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-      </div>
-      <div>
         <label class="block text-sm font-medium text-gray-700">Note:</label>
         <div class="flex">
           <template v-for="star in 5">
@@ -19,10 +15,6 @@
             </span>
           </template>
         </div>
-      </div>
-      <div>
-        <label for="comment" class="block text-sm font-medium text-gray-700">Commentaire:</label>
-        <textarea id="comment" v-model="rating.comment" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
       </div>
       <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Envoyer
@@ -37,9 +29,7 @@ export default {
     return {
       rating: {
         playerId: '', // playerId vide pour permettre à l'utilisateur de saisir manuellement l'UUID
-        performer: '',
         score: 0,
-        comment: ''
       }
     };
   },
