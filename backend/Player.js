@@ -6,6 +6,10 @@ const Player = sequelize.define('Player', {
     type: DataTypes.UUID,
     allowNull: false,
     primaryKey: true // Définir playerId comme clé primaire
+  },
+  playerName: {
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 });
 
