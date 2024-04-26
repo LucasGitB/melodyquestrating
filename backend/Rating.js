@@ -1,19 +1,19 @@
-// Importez Sequelize pour définir le modèle
 import { DataTypes } from 'sequelize';
 import sequelize from './database.js';
-// Définissez le modèle d'évaluation
+import Player from './Player.js';
+
 const Rating = sequelize.define('Rating', {
-  performer: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
   score: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  comment: {
-    type: DataTypes.TEXT,
-    allowNull: false
+  playerId: { 
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: 'Players',
+      key: 'playerId' // Modifier la clé ici pour correspondre à la colonne de référence dans la table Players
+    }
   }
 });
 
