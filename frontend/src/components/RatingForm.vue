@@ -1,6 +1,6 @@
 <template>
   <div class="rating-form bg-custom-color p-6 shadow-md">
-    <h3 class="text-lg font-semibold mb-4 text-white">
+    <h3 class="text-lg font-semibold mb-4 text-white text-center">
       Notez la performance !
     </h3>
     <form @submit.prevent="submitRating" class="space-y-4">
@@ -17,7 +17,7 @@
         />
       </div>
       <div class="my-4">
-        <label class="block text-sm font-medium text-white">Note:</label>
+        <label class="block text-xl font-medium text-white">Note:</label>
         <div class="flex">
           <template v-for="star in 5">
             <span

@@ -6,6 +6,6 @@ import RatingList from './components/RatingList.vue'
 <template>
 
   <RatingForm />
-  <!-- <RatingList /> -->
+  <RatingList />
 </template>
 
