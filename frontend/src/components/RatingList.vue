@@ -3,21 +3,23 @@
     <div class="flex justify-center">
       <img src="../assets/logo-melodyquest.png" class="w-48" />
     </div>
-    <div class="p-6 text-center">
-      <h1 class="text-2xl font-bold mb-4">Scores des joueurs</h1>
-      <div v-if="scores.length">
-        <div
-          v-for="(score, index) in scores"
-          :key="score.playerId"
-          class="mb-2"
-        >
-          <span :class="getPodiumClass(index)">{{ index + 1 }}.</span>
-          <span class="ml-2 text-lg"
-            >{{ score.Player.playerName }}: {{ score.totalScore }}</span
+    <div class="flex justify-center items-center w-full">
+      <div class="p-6 text-center">
+        <h1 class="text-2xl font-bold mb-4">Scores des joueurs</h1>
+        <div v-if="scores.length" class="bg-white rounded-xl">
+          <div
+            v-for="(score, index) in scores"
+            :key="score.playerId"
+            class="mb-2"
           >
+            <span :class="getPodiumClass(index)">{{ index + 1 }}.</span>
+            <span class="ml-2 text-lg"
+              >{{ score.Player.playerName }}: {{ score.totalScore }}</span
+            >
+          </div>
         </div>
+        <p v-else class="text-red-500">Aucun classement</p>
       </div>
-      <p v-else class="text-red-500">Aucun score trouvé</p>
     </div>
   </div>
 </template>

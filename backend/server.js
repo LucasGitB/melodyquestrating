@@ -149,9 +149,10 @@ app.get('/total-scores', async (req, res) => {
         'Player.playerId',
         'Player.playerName'
       ],
-      group: ['ratingPlayerId', 'Player.playerId', 'Player.playerName'] // inclure Player.playerId dans la clause GROUP BY
+      group: ['ratingPlayerId', 'Player.playerId', 'Player.playerName'], // inclure Player.playerId dans la clause GROUP BY
+      order: [['totalScore', 'DESC']] // trier par totalScore de manière décroissante
     });
-    
+
     if (totalScores.length === 0) {
       return res.status(404).json({ message: 'No scores found' });
     }
@@ -162,6 +163,7 @@ app.get('/total-scores', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 

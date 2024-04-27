@@ -1,6 +1,10 @@
 <template>
   <div class="rating-form bg-custom-color p-6 shadow-md">
-    <h3 class="text-lg font-semibold mb-4 text-white text-center">
+    <div class="flex justify-center">
+      <img src="../assets/logo-melodyquest.png" class="w-48" />
+    </div>
+    <br />
+    <h3 class="text-xl  font-semibold mb-4 text-white text-center">
       Notez la performance !
     </h3>
     <form @submit.prevent="submitRating" class="space-y-4">
@@ -14,8 +18,8 @@
         />
       </div>
       <div class="my-4">
-        <label class="block text-xl font-medium text-white">Note:</label>
-        <div class="flex">
+        <label class="block text-xl font-medium text-white text-center">Donnez une note de 0 à 5 étoiles</label>
+        <div class="flex justify-center">
           <template v-for="star in 5">
             <span
               class="cursor-pointer text-7xl"
@@ -30,12 +34,14 @@
           </template>
         </div>
       </div>
-      <button
+      <div class="flex justify-center">
+        <button
         type="submit"
-        class="w-full bg-custom-color-inverse hover:bg-white text-grey font-bold py-2 px-4 rounded"
+        class=" w-52 bg-custom-color-inverse bg-white text-grey font-bold py-2 px-4 rounded"
       >
         Envoyer
       </button>
+      </div>
     </form>
   </div>
 </template>
