@@ -18,7 +18,7 @@
         />
       </div>
       <div class="my-4">
-        <label class="block text-xl font-medium text-white text-center">Donnez une note de 0 à 5 étoiles</label>
+        <label class="block text-xl font-medium text-white text-center">Donnez une note de 1 à 5 étoiles</label>
         <div class="flex justify-center">
           <template v-for="star in 5">
             <span
