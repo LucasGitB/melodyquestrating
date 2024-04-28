@@ -5,7 +5,7 @@ const Player = sequelize.define('Player', {
   playerId: {
     type: DataTypes.UUID,
     allowNull: false,
-    primaryKey: true // Définir playerId comme clé primaire
+    primaryKey: true
   },
   playerName: {
     type: DataTypes.STRING,
@@ -13,7 +13,7 @@ const Player = sequelize.define('Player', {
   },
   lastGame: {
     type: DataTypes.DATE,
-    allowNull: true // Autoriser la valeur null pour lastGame
+    allowNull: true
   }
 }, {
   hooks: {

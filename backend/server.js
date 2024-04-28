@@ -1,12 +1,7 @@
-// server.js
-
 import express from 'express';
 import cors from 'cors';
-import { Sequelize } from 'sequelize';
-import User from './User.js';
 import Rating from './Rating.js';
-import Player from './Player.js'; // Assurez-vous que le chemin est correct vers votre fichier de modèle Player
-
+import Player from './Player.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,7 +38,7 @@ app.post('/players', async (req, res) => {
   }
 });
 
-
+// Route pour recuperer le dernier joueur
 app.get('/last-player', async (req, res) => {
   try {
     const lastPlayer = await Player.findOne({
@@ -61,33 +56,7 @@ app.get('/last-player', async (req, res) => {
   }
 });
 
-
-
-
-// Route pour récupérer tous les utilisateurs
-app.get('/users', async (req, res) => {
-  try {
-    const users = await User.findAll();
-    res.json(users);
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// Route pour insérer un nouvel utilisateur
-app.post('/users', async (req, res) => {
-  try {
-    const userData = req.body;
-    const newUser = await User.create(userData);
-    res.status(201).json(newUser);
-  } catch (error) {
-    console.error('Error creating user:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// Route pour insérer une nouvelle évaluation
+// Route pour noter un joueur
 app.post('/ratings', async (req, res) => {
   try {
     const ratingData = req.body;
@@ -99,7 +68,7 @@ app.post('/ratings', async (req, res) => {
   }
 });
 
-// Route pour afficher toutes les évaluations
+// Route pour afficher toutes les notes
 app.get('/ratings', async (req, res) => {
   try {
     // Récupérer toutes les évaluations
@@ -140,7 +109,7 @@ app.get('/total-scores', async (req, res) => {
       include: [
         {
           model: Player,
-          attributes: ['playerName', 'playerId'] // inclure playerId dans les attributs sélectionnés
+          attributes: ['playerName', 'playerId']
         }
       ],
       attributes: [
@@ -149,8 +118,8 @@ app.get('/total-scores', async (req, res) => {
         'Player.playerId',
         'Player.playerName'
       ],
-      group: ['ratingPlayerId', 'Player.playerId', 'Player.playerName'], // inclure Player.playerId dans la clause GROUP BY
-      order: [['totalScore', 'DESC']] // trier par totalScore de manière décroissante
+      group: ['ratingPlayerId', 'Player.playerId', 'Player.playerName'],
+      order: [['totalScore', 'DESC']] 
     });
 
     if (totalScores.length === 0) {
@@ -163,9 +132,6 @@ app.get('/total-scores', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-
-
 
 // Gestionnaire d'erreurs pour les routes non trouvées
 app.use((req, res) => {

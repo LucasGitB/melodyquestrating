@@ -17,7 +17,6 @@ const Rating = sequelize.define('Rating', {
   }
 });
 
-// Définir l'association entre Rating et Player
 Rating.belongsTo(Player, { foreignKey: 'playerId' });
 
 export default Rating;
